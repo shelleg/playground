@@ -1,0 +1,31 @@
+---
+
+- name: ubuntu14.04
+  box: ubuntu/trusty64
+  ram: 512
+  ip: 172.16.1.101
+
+- name: ubuntu16.04
+  box: bento/ubuntu-16.04
+  ram: 512
+  ip: 172.16.1.102
+
+- name: centos6
+  box: geerlingguy/centos6
+  ram: 512
+  ip: 172.16.1.103
+
+- name: centos7
+  box: centos/7
+  ram: 512
+  ip: 172.16.1.104
+
+- name: redhat6.5
+  box: anandbitra/redhat-6.5
+  ram: 512
+  ip: 172.16.1.105
+
+- name: redhat7
+  box: mrlesmithjr/rhel-7
+  ram: 512
+  ip: 172.16.1.105
