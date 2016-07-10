@@ -2,7 +2,6 @@
 # : ruby -*-
 # # vi: set ft=ruby :
 vagrant_dir = File.expand_path(File.dirname(__FILE__))
-roles_exist = 0
 ansible_verbosity = '-vvv'
 # Specify minimum Vagrant version and Vagrant API version
 Vagrant.require_version ">= 1.6.0"

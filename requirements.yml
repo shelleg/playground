@@ -1,6 +1,13 @@
 ---
 ### see REFERENCE Below as needed 
 
+- src: https://github.com/William-Yeh/ansible-oracle-java.git
+  name: java
+
+- src: https://github.com/shelleg/ansible-role-activemq.git
+  name: activemq
+
+
 ### REFERENCE ###
 ##  DO NOT REOMVE - use as reference ...
  # from galaxy
