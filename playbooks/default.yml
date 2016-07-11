@@ -6,4 +6,4 @@
   roles:
     - { role: ../galaxy-roles/java }
     - { role: ../galaxy-roles/dbmanage }
-    - { role: ../galaxy-roles/artifactory }
+    - { role: ../galaxy-roles/artifactory, artifactory_flavor: pro }
