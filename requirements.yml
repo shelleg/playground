@@ -1,6 +1,15 @@
 ---
 ### see REFERENCE Below as needed 
 
+- src: https://github.com/shelleg/ansible-role-oracle-java.git
+  name: java
+
+- src: https://github.com/shelleg/ansible-role-dbmanage.git
+  name: dbmanage
+
+- src: https://github.com/shelleg/ansible-role-artifactory.git
+  name: artifactory
+
 ### REFERENCE ###
 ##  DO NOT REOMVE - use as reference ...
  # from galaxy
