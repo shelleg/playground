@@ -1,6 +1,11 @@
 ---
 ### see REFERENCE Below as needed 
 
+- src: williamyeh.oracle-java
+  name: java
+
+- src: shelleg.nexus
+  name: nexus
 ### REFERENCE ###
 ##  DO NOT REOMVE - use as reference ...
  # from galaxy

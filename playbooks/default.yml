@@ -3,6 +3,9 @@
   become: yes
   become_user: root
   #gather_facts: no
+  vars:
+    nexus_nginx_reverse_proxy: true
   roles:
-    - { role: ../galaxy-roles/<role name> }
-    #- { role: ../site-roles/<role name> }
+#    - { role: ../galaxy-roles/<role name> }
+    - { role: java }
+    - { role: nexus }
