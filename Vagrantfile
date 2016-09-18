@@ -15,7 +15,7 @@ require 'yaml'
 servers = YAML.load_file('servers.yml')
 
 if Dir["#{vagrant_dir}/galaxy-roles/*"].empty? && Dir["#{vagrant_dir}/site-roles/*"].empty?
-  abort('no roles to execute aborting ,,, [ hint: ansible-galaxy -r requirements.yml should help :) ]')
+  abort('no roles to execute aborting ,,, [ hint: ansible-galaxy install -r requirements.yml should help :) ]')
 end
 
 # Create boxes
