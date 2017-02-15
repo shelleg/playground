@@ -33,10 +33,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       srv.vm.provision :ansible do |ansible|
             ansible.limit = servers[:name]
             ansible.playbook = "./playbooks/default.yml"
-            ansible.sudo = "true"
-            ansible.sudo_user = "root"
+            #ansible.sudo = "true"
+            #ansible.sudo_user = "root"
             ansible.host_key_checking = "false"
-            ansible.verbose = "#{ansible_verbosity}"
+            #ansible.verbose = "#{ansible_verbosity}"
             ansible.extra_vars = {
               some_var: "some_value",
               dict: {

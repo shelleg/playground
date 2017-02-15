@@ -1,0 +1,20 @@
+---
+- hosts: dev
+  become: true
+
+  vars:
+
+  roles:
+    - role: ansible-role-jenkins-installed-plugins
+
+  pre_tasks:
+
+    #- debug: var=hostvars
+    #- debug: var=hostvars
+    - debug: var=group_names
+
+    - debug: var=ansible_hostname
+
+    - debug: var=inventory_hostname
+
+

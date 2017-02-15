@@ -1,0 +1,26 @@
+---
+- hosts: custom-jenkins
+  become: true
+  pre_tasks:
+    - stat:
+        path: "{{ playbook_dir }}/../assets/"
+      register: assets_st
+      delegate_to: localhost
+      become: false
+
+    - debug: msg="{{ playbook_dir }}/../assets/"
+    - debug: var=assets_st
+    - copy:
+        src: "{{ playbook_dir }}/../assets/"
+        dest: /tmp/
+        mode: 0755
+      when: assets_st.stat.exists
+
+  roles:
+    - role: oracle-java
+    - role: ansible-role-custom-jenkins
+    - role: jenkins-populate-jobs
+#  tasks:
+#    - debug: var=jenkins_local_admin_users
+#    - debug: var=jenkins_local_admin_users[0].username
+#    - debug: var=jenkins_local_admin_users[0].password

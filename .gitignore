@@ -4,3 +4,4 @@ log/ansible.log
 ./galaxy-roles/*
 galaxy-roles/*/
 playbooks/*.retry
+site-roles/*

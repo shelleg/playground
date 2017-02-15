@@ -1,5 +1,20 @@
 ---
-### see REFERENCE Below as needed 
+
+- src: https://github.com/shelleg/ansible-role-oracle-java.git
+  version: 2.9.0
+  name: oracle-java
+
+- src: https://github.com/geerlingguy/ansible-role-repo-epel/archive/1.2.0.tar.gz
+  version: 1.2.0
+  name: geerlingguy.repo-epel
+  
+  # - ansible-role-custom-jenkins
+  # - ansible-role-jenkins-export
+  # - ansible-role-juseppe
+  # - ansible-role-proxy-client
+  # - ansible-role-simple-docker-daemon
+  
+### see REFERENCE Below as needed
 
 ### REFERENCE ###
 ##  DO NOT REOMVE - use as reference ...

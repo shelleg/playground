@@ -1,0 +1,23 @@
+---
+- name: Test ping on localhost
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars:
+    squid_server_mode: true
+    squid_yum: false
+    squid_apt: false
+    squid_proxy_host: "127.0.0.1"
+    squid_proxy_port: 7777
+
+  roles:
+    - role: ansible-role-squid
+
+  # tasks:
+  # - name: Ping!
+  #   #ping
+  #   shell: ping "{{ inventory_hostname }}" -c 2
+  #   register: result
+  #
+  # - debug: var=result

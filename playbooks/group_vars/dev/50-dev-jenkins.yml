@@ -1,0 +1,211 @@
+---
+#=======================================
+my_jenkins_version: '2.32'
+
+my_docker_host_ip: "{{ inventory_hostname }}"
+my_docker_juseppe_port: 9090
+
+my_use_custom_update_site: true
+
+my_installed_plugins_file: "{{ playbook_dir }}/group_vars/{{ group_names[0] }}/20_installed_plugins.yml"
+
+###################################
+### For enable proxy usage:
+### - set my_set_proxy_os_level:true
+### - uncomment 'environment' section in PLAYBOOK file (!!!)
+###################################
+### For disbale proxy usage:
+### - set my_set_proxy_os_level:false
+### - comment 'environment' section in PLAYBOOK file (!!!)
+###################################
+my_set_proxy_os_level: true
+
+my_set_proxy_jenkins: false
+
+my_proxy_host: 172.16.2.100
+my_proxy_port: 7777
+my_no_proxy_list:
+  - localhost
+  - 127.0.0.1
+  - "{{ my_docker_host_ip }}"
+my_no_proxy_string: "{% for ph in my_no_proxy_list %}{{ ph }}{% if not loop.last %},{% endif %}{% endfor %}"
+
+#=======================================
+
+cj_channel: latest-LTS # could be latest || latest-LTS
+cj_version: "{{ my_jenkins_version }}"
+
+## Custom Jenkins Playbook variables
+cj_proxy_host: "{{ my_proxy_host }}"
+cj_proxy_port: "{{ my_proxy_port }}"
+cj_set_proxy: "{{ my_set_proxy_jenkins }}"
+cj_use_custom_update_site: "{{ my_use_custom_update_site }}"
+cj_installed_plugins: "{{ installed_plugins }}"
+cj_no_proxy_hosts: "{{ my_no_proxy_string }}"
+
+##
+juseppe_cert_dir: /var/lib/juseppe
+juseppe_cert_file: uc.crt
+juseppe_host_port: "{{ my_docker_juseppe_port }}"
+juseppe_docker_host_ip: "{{ my_docker_host_ip }}"
+juseppe_plugins: "{{ installed_plugins }}"
+
+## for 'shelleg.proxy-client' role
+proxy_server_host: "{{ my_proxy_host }}"
+proxy_server_port: "{{ my_proxy_port }}"
+proxy_client_no_proxy_string: "{{ my_no_proxy_string }}"
+proxy_client_yum: "{{ my_set_proxy_os_level }}"
+proxy_client_system: "{{ my_set_proxy_os_level }}"
+
+##
+docker_use_proxy: "{{ my_set_proxy_os_level }}"
+docker_proxy_server_host: "{{ my_proxy_host }}"
+docker_proxy_server_port: "{{ my_proxy_port }}"
+docker_no_proxy_string: "{{ my_no_proxy_list }}"
+
+jexp_installed_plugins_file: "{{ my_installed_plugins_file }}"
+
+#=======================================
+
+cj_allow_anon_read: true
+
+# AD authorization ========================
+## we need only one 'master' admin user with password for first connection
+cj_AD_auth: false
+cj_AD_auth_domain: ''
+cj_AD_auth_site: ''
+cj_AD_auth_server: ''
+cj_AD_auth_bindName: ''
+cj_AD_auth_bindPassword: ''
+# AD authorization ========================
+
+# LDAP authorization ======================
+cj_LDAP_auth: false
+# LDAP authorization ======================
+
+# Basic authorization (internal db) =======
+cj_basic_auth: true
+# Basic authorization (internal db) =======
+
+# Users ===================================
+cj_local_admin_users:
+  - { username: admin, password: admin }
+cj_local_regular_users:
+  - { username: user1, password: user1 }
+  - { username: user2, password: user2 }
+
+# Users ===================================
+
+cj_plugins:
+  - { name: "jenkins-multijob-plugin" }
+  - { name: "bouncycastle-api", version: "2.16.0"}
+  - { name: "cloudbees-folder", version: "5.15" }
+  - { name: "structs", version: "1.5" }
+  - { name: "junit", version: "1.19" }
+  - { name: "antisamy-markup-formatter", version: "1.5" }
+  - { name: "pam-auth", version: "1.3" }
+  - { name: "windows-slaves", version: "1.2" }
+  - { name: "display-url-api", version: "0.5" }
+  - { name: "mailer", version: "1.18" }
+  - { name: "ldap", version: "1.13" }
+  - { name: "token-macro", version: "2.0" }
+  - { name: "external-monitor-job", version: "1.6" }
+  - { name: "icon-shim", version: "2.0.3" }
+  - { name: "matrix-auth", version: "1.4" }
+  - { name: "script-security", version: "1.24" }
+  - { name: "matrix-project", version: "1.7.1" }
+  - { name: "build-timeout", version: "1.18" }
+  - { name: "credentials", version: "2.1.10" }
+  - { name: "workflow-step-api", version: "2.6" }
+  - { name: "plain-credentials", version: "1.3" }
+  - { name: "credentials-binding", version: "1.10" }
+  - { name: "timestamper", version: "1.8.7" }
+  - { name: "workflow-api", version: "2.8" }
+  - { name: "workflow-basic-steps", version: "2.3" }
+  - { name: "resource-disposer", version: "0.3" }
+  - { name: "ws-cleanup", version: "0.32" }
+  - { name: "ant", version: "1.4" }
+  - { name: "gradle", version: "1.25" }
+  - { name: "pipeline-milestone-step", version: "1.2" }
+  - { name: "workflow-support", version: "2.11" }
+  - { name: "pipeline-build-step", version: "2.4" }
+  - { name: "jquery-detached", version: "1.2.1" }
+  - { name: "pipeline-input-step", version: "2.5" }
+  - { name: "ace-editor", version: "1.1" }
+  - { name: "workflow-scm-step", version: "2.3" }
+  - { name: "scm-api", version: "1.3" }
+  - { name: "workflow-cps", version: "2.23" }
+  - { name: "pipeline-stage-step", version: "2.2" }
+  - { name: "workflow-job", version: "2.9" }
+  - { name: "pipeline-graph-analysis", version: "1.3" }
+  - { name: "pipeline-rest-api", version: "2.4" }
+  - { name: "handlebars", version: "1.1.1" }
+  - { name: "momentjs", version: "1.1.1" }
+  - { name: "pipeline-stage-view", version: "2.4" }
+  - { name: "ssh-credentials", version: "1.12" }
+  - { name: "git-client", version: "2.1.0" }
+  - { name: "git-server", version: "1.7" }
+  - { name: "workflow-cps-global-lib", version: "2.5" }
+  - { name: "branch-api", version: "1.11.1" }
+  - { name: "workflow-multibranch", version: "2.9.2" }
+  - { name: "durable-task", version: "1.12" }
+  - { name: "workflow-durable-task-step", version: "2.5" }
+  - { name: "workflow-aggregator", version: "2.4" }
+  - { name: "github-api", version: "1.82" }
+  - { name: "git", version: "3.0.1" }
+  - { name: "github", version: "1.25.0" }
+  - { name: "github-branch-source", version: "1.10.1" }
+  - { name: "github-organization-folder", version: "1.5" }
+  - { name: "mapdb-api", version: "1.0.9.0" }
+  - { name: "subversion", version: "2.7.1" }
+  - { name: "ssh-slaves", version: "1.12" }
+  - { name: "email-ext", version: "2.53", enabled: "true" }
+  - { name: "artifactory", version: "2.9.0", enabled: "true" }
+  - { name: "job-dsl", version: "1.54", enabled: "true" }
+  - { name: "job-node-stalker" }
+  - { name: "jquery" }
+  - { name: "workflow-cps-global-lib", version: "2.5" }
+  - { name: "build-pipeline-plugin" }
+  - { name: "icon-shim", version: "2.0.3" }
+  - { name: "matrix-auth", version: "1.4" }
+  - { name: "simple-theme-plugin", version: "0.3" }
+  - { name: "greenballs" }
+
+cj_nodes_credentials:
+  - { name: "solaris-user", id: "8bf43f0b-5cef-46b7-8d64-d1bd0a77e11a9", username: "nodeuser", password: "test", description: "use this for solaris slaves" }
+  - { name: "linux-user", id:   "f112cc48-5e1b-4efe-9bb0-d1a902f67784", username: "jenkins_user", password: "toor", description: "use this for solaris slaves" }
+  - { name: "aux-user", id:     "4b2a3485-bf8b-429d-8b21-c19d6b60f198", username: "aux_jenkins_user", password: "tralala", description: "use this for AUX slaves" }
+
+cj_nodes_create: true
+cj_nodes:
+  - { name: "linux01", host: "linux1.domain.com", launcher_type: "ssh", ssh_port: "22", credential_id: "f112cc48-5e1b-4efe-9bb0-d1a902f67784", home: "/home/jenkins", labels: "linux", executors: "5", description: "linux slave" }
+#  - { name: "linux02", host: "linux2.domain.com", launcher_type: "ssh", ssh_port: "22", credential_id: "f112cc48-5e1b-4efe-9bb0-d1a902f67783", home: "/home/jenkins", labels: "linux", executors: "5", description: "linux slave" }
+#  - { name: "linux03", host: "linux3.domain.com", launcher_type: "ssh", ssh_port: "22", credential_id: "f112cc48-5e1b-4efe-9bb0-d1a902f67782", home: "/home/jenkins", labels: "linux", executors: "5", description: "linux slave" }
+#  - { name: "solaris01", host: "solaris1.domain.com", launcher_type: "ssh", ssh_port: "22", credential_id: "8bf43f0b-5cef-46b7-8d64-d1bd0a77e11a9", home: "/home/jenkins", labels: "solaris", executors: "3", description: "solaris slave" }
+#  - { name: "windows01", host: "win01.domain.com", launcher_type: "jnlp", ssh_port: "", credential_id: "", home: "c:\\\\jenkins", labels: "windows", executors: "5", description: "windows slave" }
+
+cj_oracle_account_username: "ivan.prokhorov@gmail.com"
+cj_oracle_account_password: "Abrasha200"
+
+cj_tools_jdks:
+  - { name: "jdk-8u112", version: "jdk-8u112"}
+  - { name: "jdk-8u92", version: "jdk-8u92"}
+  - { name: "jdk-8u77", version: "jdk-8u77"}
+
+## cj_use_custom_update_site:
+##   false:
+##     - jenkins server will connect to default Update Site and take the latest plugins
+##   true:
+##     - custom update site will be created;
+##     - download plugins according to file {{ cj_installed_plugins_yml }} to the custom update site;
+##     - jenkins server will use only the custom site;
+##     So, only plugins (with specific versions) from file {{ cj_installed_plugins_yml }} will be available
+
+cj_artifactory_configure: true
+cj_artifactory_useCredentialsPlugin: true
+cj_artifactory_pushToBintrayEnabled: false
+cj_artifactory_servers:
+  - { id: "my_artifactory_server_1", url: "artifactory1.domain.com", deployer_credentialsId: "8bf43f0b-5cef-46b7-8d64-d1bd0a77e11a9", resolver_credentialsId: "4b2a3485-bf8b-429d-8b21-c19d6b60f198", timeout: 300, bypassProxy: false }
+  - { id: "my_artifactory_server_2", url: "artifactory2.domain.com", deployer_credentialsId: "", resolver_credentialsId: "", timeout: 300, bypassProxy: false }
+
+

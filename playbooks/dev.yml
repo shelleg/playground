@@ -1,0 +1,38 @@
+---
+- hosts: dev
+  become: true
+
+  vars:
+
+  roles:
+    - role: ansible-role-proxy-client
+      when: my_set_proxy_os_level == true
+    - role: oracle-java
+    - role: geerlingguy.repo-epel
+    - role: ansible-role-simple-docker-daemon
+      when: my_use_custom_update_site == true
+    - role: ansible-role-juseppe
+      when: my_use_custom_update_site == true
+    - role: ansible-role-custom-jenkins
+
+
+#    - role: jenkins-populate-jobs
+
+  pre_tasks:
+    - stat:
+        path: "{{ playbook_dir }}/../assets/java"
+      register: java_st
+      delegate_to: localhost
+      become: false
+
+    - copy:
+        src: "{{ playbook_dir }}/../assets/java/"
+        dest: /tmp/
+        mode: 0755
+      when: java_st.stat.exists
+
+  environment:
+    http_proxy: "http://{{ my_proxy_host }}:{{ my_proxy_port }}"
+    https_proxy: "http://{{ my_proxy_host }}:{{ my_proxy_port }}"
+    ftp_proxy: "http://{{ my_proxy_host }}:{{ my_proxy_port }}"
+    no_proxy: "{{ my_no_proxy_string }}"

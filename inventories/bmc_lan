@@ -1,0 +1,2 @@
+[dev]
+172.16.2.200 ansible_connection=ssh ansible_user=vagrant ansible_ssh_pass=vagrant
